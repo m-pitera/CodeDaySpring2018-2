@@ -1,0 +1,124 @@
+animations {
+  id: "Down"
+  images {
+    image: "/Betty/walkForward/sprite_0.png"
+  }
+  images {
+    image: "/Betty/walkForward/sprite_1.png"
+  }
+  images {
+    image: "/Betty/walkForward/sprite_2.png"
+  }
+  images {
+    image: "/Betty/walkForward/sprite_3.png"
+  }
+  images {
+    image: "/Betty/walkForward/sprite_4.png"
+  }
+  images {
+    image: "/Betty/walkForward/sprite_5.png"
+  }
+  images {
+    image: "/Betty/walkForward/sprite_6.png"
+  }
+  images {
+    image: "/Betty/walkForward/sprite_7.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "Right"
+  images {
+    image: "/Betty/walkBackward/sprite_0.png"
+  }
+  images {
+    image: "/Betty/walkBackward/sprite_1.png"
+  }
+  images {
+    image: "/Betty/walkBackward/sprite_2.png"
+  }
+  images {
+    image: "/Betty/walkBackward/sprite_3.png"
+  }
+  images {
+    image: "/Betty/walkBackward/sprite_4.png"
+  }
+  images {
+    image: "/Betty/walkBackward/sprite_5.png"
+  }
+  images {
+    image: "/Betty/walkBackward/sprite_6.png"
+  }
+  images {
+    image: "/Betty/walkBackward/sprite_7.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "Left"
+  images {
+    image: "/Betty/walkLeft/sprite_0.png"
+  }
+  images {
+    image: "/Betty/walkLeft/sprite_1.png"
+  }
+  images {
+    image: "/Betty/walkLeft/sprite_2.png"
+  }
+  images {
+    image: "/Betty/walkLeft/sprite_3.png"
+  }
+  images {
+    image: "/Betty/walkLeft/sprite_4.png"
+  }
+  images {
+    image: "/Betty/walkLeft/sprite_5.png"
+  }
+  images {
+    image: "/Betty/walkLeft/sprite_6.png"
+  }
+  images {
+    image: "/Betty/walkLeft/sprite_7.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "Up"
+  images {
+    image: "/Betty/walkRight/sprite_0.png"
+  }
+  images {
+    image: "/Betty/walkRight/sprite_1.png"
+  }
+  images {
+    image: "/Betty/walkRight/sprite_2.png"
+  }
+  images {
+    image: "/Betty/walkRight/sprite_3.png"
+  }
+  images {
+    image: "/Betty/walkRight/sprite_4.png"
+  }
+  images {
+    image: "/Betty/walkRight/sprite_5.png"
+  }
+  images {
+    image: "/Betty/walkRight/sprite_6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+margin: 0
+extrude_borders: 0
+inner_padding: 0

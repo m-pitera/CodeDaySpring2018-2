@@ -1,0 +1,34 @@
+local function spawn_shit(position)
+	return factory.create("#shitFactory", position)
+end
+
+function init(self)
+	math.randomseed(os.time())
+	self.shit = {}
+	msg.post(".", "acquire_input_focus")
+end
+
+function final(self)
+	msg.post(".", "release_input_focus")
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Remove this function if not needed
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.released then
+		table.insert(self.shit, spawn_shit(vmath.vector3(action.screen_x, action.screen_y, 0)))
+	end
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Remove this function if not needed
+end

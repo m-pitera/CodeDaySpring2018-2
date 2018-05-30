@@ -1,0 +1,10 @@
+function init(self)
+	self.timer = 100 -- in seconds
+end
+
+function update(self, dt)
+	if self.timer > 0 then
+		self.timer = math.max(self.timer - dt, 0) -- make sure it doesn't go below 0
+		gui.set_text(gui.get_node("my_text_node"), tostring(self.timer))
+	end
+end

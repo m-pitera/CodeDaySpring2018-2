@@ -1,0 +1,142 @@
+local speed = 2;
+local wallx = 0;
+local wally = 0;
+local function play_animation(self, animation)
+	if self.current_animation ~= animation then
+		self.current_animation = animation
+		msg.post("#sprite","play_animation",{id = animation})
+	end
+end
+	
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	self.direction = vmath.vector3(0,0,0)
+	self.actions = {}
+	self.current_animation = nil
+end
+
+function final(self)
+	msg.post(".", "release_input_focus")
+end
+
+function update(self, dt)
+	play_animation(self, self.current_animation)
+end
+--sup
+function on_message(self, message_id, message, sender)
+	if message_id == hash("aShitWall") then 
+		wallx = message.x
+		wally = message.y
+	end
+end
+function wall()
+	p = go.get_position()
+	if wallx ~= 0 then
+		if wallx - p.x < 0 then
+			return hash("Down")	
+		elseif wallx - p.x > 0 then
+			return hash("Up")
+		elseif wally - p.y < 0 then
+			return hash("Left")
+		elseif wally - p.y > 0 then
+			return hash("Right")
+		end
+		wallx = 0;
+		wally = 0;
+	end
+end
+	
+function on_input(self, action_id, action)
+	local p = go.get_position()	
+	if action_id == hash("Up") and wall() ~= hash("Up") then
+		p.y = p.y + speed
+		play_animation(self, hash("Up"))
+	elseif action_id == hash("Down") and wall() ~= hash("Down") then
+		p.y = p.y - speed
+		play_animation(self, hash("Down"))
+	elseif action_id == hash("Left") and wall() ~= hash("Left") then
+		p.x = p.x - speed
+		play_animation(self, hash("Left"))
+	elseif action_id == hash("Right") and wall() ~= hash("Right") then
+		p.x = p.x + speed
+		play_animation(self, hash("Right"))
+	end
+	--msg.post("Little_Shits", hash("collision_check"),{ pos = p})
+	go.set_position(p)
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Remove this function if not needed
+end
+
+--[[
+local function random_position()
+	return vmath.vector3(math.random(64, 1156 - 128), math.random(64, 640 - 128), 0)
+end
+
+local function spawn_hitman(position)
+	return factory.create("#hitmanfactory", position)
+end
+
+
+This is under init
+	math.randomseed(os.time())
+	self.hitmen = {}
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.released then
+		table.insert(self.hitmen, spawn_hitman(vmath.vector3(action.screen_x, action.screen_y, 0)))
+	end
+end
+]]--
+
+--[[This is under the zombie script
+
+function on_message(self, message_id, message, sender)
+	if message_id == COLLISION_RESPONSE then
+		if message.group == HITMAN then
+			local my_pos = go.get_world_position()
+			local other_pos = go.get_world_position(message.other_id)
+			local distance_to_target = vmath.length(my_pos - self.target_position)
+			local distance_to_collision = vmath.length(my_pos - other_pos)
+			if distance_to_collision < distance_to_target or not self.target_id then
+				self.target_position = other_pos
+				self.target_id = message.other_id
+			end
+		end
+	elseif message_id == CONTACT_POINT_RESPONSE then
+		if message.group == WALL then
+			go.set_position(go.get_position() + message.normal * message.distance)
+			self.target_position = random_position_on_wall()
+		end
+	end
+end
+]]--
+
+
+--[[This is under zombie update
+
+local pos = go.get_world_position()
+local target_angle = -math.atan2(self.target_position.x - pos.x, self.target_position.y - pos.y)
+local target_quat = vmath.quat_rotation_z(target_angle)
+local current_quat = go.get_rotation()
+
+-- rotate towards target
+local q = vmath.slerp(0.08, current_quat, target_quat)
+go.set_rotation(q)
+
+-- move towards target
+local d = vmath.rotate(q, vmath.vector3(0, 1, 0))
+go.set_position(pos + d * self.speed * dt)
+
+-- if we have a target id we assume that it will die this frame and pick a random
+-- target position and reset the target id flag.
+-- if the target is still alive the next frame we will get a new collision and
+-- we'll be able to set the target position again. 
+if self.target_id then
+	self.target_position = random_position_on_wall()
+end
+self.target_id = nil
+
+]]--

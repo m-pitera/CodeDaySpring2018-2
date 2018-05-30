@@ -1,0 +1,29 @@
+animations {
+  id: "Left"
+  images {
+    image: "/Shit/ShitWalksLeft/sprite_0.png"
+  }
+  images {
+    image: "/Shit/ShitWalksLeft/sprite_1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "Right"
+  images {
+    image: "/Shit/ShitWalksRight/sprite_0.png"
+  }
+  images {
+    image: "/Shit/ShitWalksRight/sprite_1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+margin: 0
+extrude_borders: 0
+inner_padding: 0
